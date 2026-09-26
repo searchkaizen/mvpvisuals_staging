@@ -3,10 +3,10 @@
 | Source | Recalls | maker_linked | retailer_self | sold_at_only | none | maker_linked % |
 |---|---:|---:|---:|---:|---:|---:|
 | FSIS | 0 | 0 | 0 | 0 | 0 | 0.0% |
-| FDA human food | 7742 | 585 | 251 | 43 | 6863 | 7.6% |
+| FDA human food | 7742 | 574 | 266 | 44 | 6858 | 7.4% |
 | FDA pet/animal | 109 | 13 | 3 | 0 | 93 | 11.9% |
-| ALL excl. pet | 7742 | 585 | 251 | 43 | 6863 | 7.6% |
-| ALL | 7851 | 598 | 254 | 43 | 6956 | 7.6% |
+| ALL excl. pet | 7742 | 574 | 266 | 44 | 6858 | 7.4% |
+| ALL | 7851 | 587 | 269 | 44 | 6951 | 7.5% |
 
 FSIS maker_linked recalls that also carry an EST (plant) number: 0 of 0
 
@@ -14,16 +14,15 @@ FSIS maker_linked recalls that also carry an EST (plant) number: 0 of 0
 
 | Bar | Result | Pass |
 |---|---|---|
-| Unique retailer -> maker edges per year (excl. pet) >= 40 | 47.0 | yes |
+| Unique retailer -> maker edges per year (excl. pet) >= 40 | 47.1 | yes |
 | FSIS maker_linked recalls with a plant (EST) number >= 70% | 0% | no |
 | Big five retailers with at least one edge (all five) | 5/5 (none missing) | yes |
 
-Unique retailer -> maker edges: 703
+Unique retailer -> maker edges: 704
 
 | Retailer | Maker (recalling firm) | Recalls |
 |---|---|---:|
 | Walmart | Dole Fresh Vegetables | 9 |
-| Whole Foods | Whole Food Market | 9 |
 | Kroger | Dole Fresh Vegetables | 7 |
 | Aldi | Dole Fresh Vegetables | 6 |
 | Wegmans | First Source | 6 |
@@ -64,7 +63,7 @@ Unique retailer -> maker edges: 703
 | Aldi | Kar Nut Products | 2 |
 | H-E-B | H E B Grocery | 2 |
 | Aldi | Texas Star Nut and Food | 2 |
-| Ahold Delhaize | Lakeside Foods | 2 |
+| Giant Eagle | Lakeside Foods | 2 |
 | Whole Foods | Marin Food Specialties | 2 |
 | Dollar General | Treehouse Foods | 2 |
 | UNFI/SuperValu | Treehouse Foods | 2 |
@@ -115,10 +114,9 @@ Unique retailer -> maker edges: 703
 | Wegmans | NORTERA FOODS USA | 2 |
 | Trader Joe's | Treehouse Foods | 2 |
 | Publix | Fresh Express Incorpated | 2 |
-| Ahold Delhaize | Treehouse Foods | 2 |
+| Giant Eagle | Treehouse Foods | 2 |
 | Walmart | Refresco Beverages US | 2 |
 | Kroger | Admiralty Island Fisheries | 2 |
-| Whole Foods | WFM Purchasing | 2 |
 | Albertsons | Sunland, Incorporated | 1 |
 | Sprouts | Sunland, Incorporated | 1 |
 | Trader Joe's | Sunland, Incorporated | 1 |
@@ -155,6 +153,7 @@ Unique retailer -> maker edges: 703
 | Trader Joe's | Ghiringhelli Specialty Foods | 1 |
 | Western Family | Acme Food Sales | 1 |
 | Ahold Delhaize | Clement Pappas & | 1 |
+| Giant Eagle | Clement Pappas & | 1 |
 | Kroger | Clement Pappas & | 1 |
 | Publix | Clement Pappas & | 1 |
 | Trader Joe's | Clement Pappas & | 1 |
@@ -184,7 +183,7 @@ Unique retailer -> maker edges: 703
 | Target | Reser's Fine Foods | 1 |
 | Albertsons | Taylor Farms Pacific (MacArthur Facility) | 1 |
 | Aldi | Parkers Farm | 1 |
-| Ahold Delhaize | Hot Mama's Foods | 1 |
+| Giant Eagle | Hot Mama's Foods | 1 |
 | Meijer | H:20 Innovations | 1 |
 | Aldi | Lewis Bakeries-Evansville | 1 |
 | Walmart | Lewis Bakeries-Evansville | 1 |
@@ -210,7 +209,7 @@ Unique retailer -> maker edges: 703
 | Wakefern/ShopRite | Readington Farms | 1 |
 | Walmart | Ann's House of Nuts | 1 |
 | Hy-Vee | Marathon Ventures | 1 |
-| Ahold Delhaize | Del Monte Fresh Produce NA | 1 |
+| Giant Eagle | Del Monte Fresh Produce NA | 1 |
 | Wegmans | Del Monte Fresh Produce NA | 1 |
 | Meijer | Dairy Farmers OF America | 1 |
 | UNFI/SuperValu | Dairy Farmers OF America | 1 |
@@ -269,7 +268,7 @@ Unique retailer -> maker edges: 703
 | Trader Joe's | Wonderful Pistachios & Almonds | 1 |
 | Albertsons | Taylor Farms Pacific | 1 |
 | Aldi | Reser's Fine Foods - Century | 1 |
-| Ahold Delhaize | CAMBRIDGE FARMS OF HANOVER D | 1 |
+| Giant Eagle | CAMBRIDGE FARMS OF HANOVER D | 1 |
 | Whole Foods | R.W.Garcia | 1 |
 | Whole Foods | Bakers Of Paris | 1 |
 | Publix | Inland Seafood | 1 |
@@ -352,7 +351,7 @@ Unique retailer -> maker edges: 703
 | Trader Joe's | Athens Baking | 1 |
 | CVS | Dedinas Franzak Enterprises | 1 |
 | Whole Foods | Urban Remedy | 1 |
-| Ahold Delhaize | Fieldbrook Foods | 1 |
+| Giant Eagle | Fieldbrook Foods | 1 |
 | Kroger | Fieldbrook Foods | 1 |
 | Wakefern/ShopRite | Fieldbrook Foods | 1 |
 | Walmart | Fieldbrook Foods | 1 |
@@ -382,7 +381,7 @@ Unique retailer -> maker edges: 703
 | Western Family | Sister Schubert's Rolls Division of T.Marzetti | 1 |
 | Ahold Delhaize | Shearer's Snacks | 1 |
 | Walmart | California Natural Products | 1 |
-| Ahold Delhaize | Kanan Enterprises | 1 |
+| Giant Eagle | Kanan Enterprises | 1 |
 | Albertsons | Poppies International | 1 |
 | Western Family | Shearers Foods | 1 |
 | H-E-B | Agro Sevilla USA | 1 |
@@ -434,17 +433,17 @@ Unique retailer -> maker edges: 703
 | Albertsons | Nature's Touch Frozen Foods | 1 |
 | Trader Joe's | Frial SAS | 1 |
 | Costco | Townsend Farms | 1 |
-| Ahold Delhaize | Fresh Express Incorporated | 1 |
 | Albertsons | Fresh Express Incorporated | 1 |
 | Aldi | Fresh Express Incorporated | 1 |
+| Giant Eagle | Fresh Express Incorporated | 1 |
 | Hy-Vee | Fresh Express Incorporated | 1 |
 | Wakefern/ShopRite | Fresh Express Incorporated | 1 |
 | Walmart | Fresh Express Incorporated | 1 |
 | H-E-B | TAMPA BAY FISHERIES | 1 |
 | 7-Eleven | Almark Foods | 1 |
-| Ahold Delhaize | Almark Foods | 1 |
 | Albertsons | Almark Foods | 1 |
 | Costco | Almark Foods | 1 |
+| Giant Eagle | Almark Foods | 1 |
 | Kroger | Almark Foods | 1 |
 | Sam's Club | Almark Foods | 1 |
 | UNFI/SuperValu | Almark Foods | 1 |
@@ -552,7 +551,7 @@ Unique retailer -> maker edges: 703
 | Target | Old Europe Cheese | 1 |
 | Ahold Delhaize | Poppies International | 1 |
 | Wegmans | Epicurean Butter | 1 |
-| Ahold Delhaize | Frozen Food Development | 1 |
+| Giant Eagle | Frozen Food Development | 1 |
 | Walmart | South Georgia Pecan | 1 |
 | Wegmans | Old Chatham Sheepherding Creamery | 1 |
 | Costco | SunOpta Grains and Foods | 1 |
@@ -568,6 +567,7 @@ Unique retailer -> maker edges: 703
 | Whole Foods | SunOpta Grains and Foods | 1 |
 | Wegmans | Stellex/CF Houston | 1 |
 | Ahold Delhaize | C & S Wholesale Grocers | 1 |
+| Giant Eagle | Great Lakes Cheese | 1 |
 | Meijer | Great Lakes Cheese | 1 |
 | UNFI/SuperValu | Great Lakes Cheese | 1 |
 | Whole Foods | Braga Fresh Foods | 1 |
@@ -605,6 +605,7 @@ Unique retailer -> maker edges: 703
 | Meijer | Palmer & | 1 |
 | Target | Palmer & | 1 |
 | Walmart | Palmer & | 1 |
+| Ahold Delhaize | Treehouse Foods | 1 |
 | H-E-B | Treehouse Foods | 1 |
 | Kroger | Treehouse Foods | 1 |
 | Publix | Treehouse Foods | 1 |
@@ -634,7 +635,7 @@ Unique retailer -> maker edges: 703
 | Whole Foods | Richelieu Foods | 1 |
 | Walmart | John B. Sanfilippo & Son | 1 |
 | H-E-B | Reser's Fine Foods | 1 |
-| Ahold Delhaize | House Of Flavors | 1 |
+| Giant Eagle | House Of Flavors | 1 |
 | Trader Joe's | Barsotti Juice | 1 |
 | Walmart | Taylor Fresh Foods | 1 |
 | Sam's Club | Biery Cheese | 1 |
@@ -665,7 +666,7 @@ Unique retailer -> maker edges: 703
 | Albertsons | Admiralty Island Fisheries | 1 |
 | Publix | Admiralty Island Fisheries | 1 |
 | WinCo | Admiralty Island Fisheries | 1 |
-| Ahold Delhaize | Shearer's Foods | 1 |
+| Giant Eagle | Shearer's Foods | 1 |
 | Target | Shearer's Foods | 1 |
 | Sprouts | Great Lakes Cheese | 1 |
 | Target | Great Lakes Cheese | 1 |
@@ -712,7 +713,7 @@ Unique retailer -> maker edges: 703
 | Kroger | Ajinomoto Foods North America | 1 |
 | Trader Joe's | Ajinomoto Foods North America | 1 |
 | Walmart | Taylor Farms de Mexico S. de R.L. de C.V | 1 |
-| Ahold Delhaize | Legacy Bakehouse | 1 |
+| Giant Eagle | Legacy Bakehouse | 1 |
 | Albertsons | DIRECT SOURCE SEAFOOD | 1 |
 | Meijer | Bakkavor | 1 |
 | Trader Joe's | Bakkavor | 1 |
@@ -731,18 +732,19 @@ Unique retailer -> maker edges: 703
 | Walmart | 111 |
 | Trader Joe's | 88 |
 | Kroger | 76 |
-| Ahold Delhaize | 65 |
 | Aldi | 65 |
+| Ahold Delhaize | 51 |
 | Target | 49 |
 | Albertsons | 47 |
 | Wegmans | 47 |
-| Whole Foods | 47 |
+| Whole Foods | 36 |
 | Meijer | 32 |
 | Publix | 32 |
 | H-E-B | 29 |
 | UNFI/SuperValu | 25 |
 | Western Family | 24 |
 | Hy-Vee | 18 |
+| Giant Eagle | 17 |
 | Costco | 17 |
 | Sprouts | 14 |
 | Wakefern/ShopRite | 14 |
