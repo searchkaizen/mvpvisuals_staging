@@ -2,23 +2,23 @@
 
 | Source | Recalls | maker_linked | retailer_self | sold_at_only | none | maker_linked % |
 |---|---:|---:|---:|---:|---:|---:|
-| FSIS | 0 | 0 | 0 | 0 | 0 | 0.0% |
-| FDA human food | 7742 | 574 | 266 | 44 | 6858 | 7.4% |
-| FDA pet/animal | 109 | 13 | 3 | 0 | 93 | 11.9% |
-| ALL excl. pet | 7742 | 574 | 266 | 44 | 6858 | 7.4% |
-| ALL | 7851 | 587 | 269 | 44 | 6951 | 7.5% |
+| FSIS | 1193 | 120 | 12 | 7 | 1054 | 10.1% |
+| FDA human food | 7764 | 578 | 268 | 44 | 6874 | 7.4% |
+| FDA pet/animal | 87 | 9 | 1 | 0 | 77 | 10.3% |
+| ALL excl. pet | 8957 | 698 | 280 | 51 | 7928 | 7.8% |
+| ALL | 9044 | 707 | 281 | 51 | 8005 | 7.8% |
 
-FSIS maker_linked recalls that also carry an EST (plant) number: 0 of 0
+FSIS maker_linked recalls that also carry an EST (plant) number: 108 of 120
 
 ## Pass bars
 
 | Bar | Result | Pass |
 |---|---|---|
-| Unique retailer -> maker edges per year (excl. pet) >= 40 | 47.1 | yes |
-| FSIS maker_linked recalls with a plant (EST) number >= 70% | 0% | no |
+| Unique retailer -> maker edges per year (excl. pet) >= 40 | 54.5 | yes |
+| FSIS maker_linked recalls with a plant (EST) number >= 70% | 90% | yes |
 | Big five retailers with at least one edge (all five) | 5/5 (none missing) | yes |
 
-Unique retailer -> maker edges: 704
+Unique retailer -> maker edges: 807
 
 | Retailer | Maker (recalling firm) | Recalls |
 |---|---|---:|
@@ -26,7 +26,13 @@ Unique retailer -> maker edges: 704
 | Kroger | Dole Fresh Vegetables | 7 |
 | Aldi | Dole Fresh Vegetables | 6 |
 | Wegmans | First Source | 6 |
+| Trader Joe's |  | 5 |
 | Ahold Delhaize | ASK Foods | 4 |
+| Aldi |  | 3 |
+| Kroger |  | 3 |
+| Trader Joe's | Ghiringhelli Brothers | 3 |
+| H-E-B |  | 3 |
+| Giant Eagle | Fresh Food Manufacturing | 3 |
 | Target | Garden-Fresh Foods | 3 |
 | Trader Joe's | World Class Distribution | 3 |
 | Aldi | Reser's Fine Foods | 3 |
@@ -44,6 +50,20 @@ Unique retailer -> maker edges: 704
 | Trader Joe's | Taylor Farms Retail | 3 |
 | Aldi | Great Lakes Cheese | 3 |
 | Walmart | Shearer's Foods | 3 |
+| Walmart | FreshRealm | 2 |
+| Whole Foods | NPC Processing | 2 |
+| Albertsons |  | 2 |
+| Walmart | Garland Ventures | 2 |
+| H-E-B | Nuevo Garcia Foods | 2 |
+| Trader Joe's | F&S Produce West | 2 |
+| Publix | Tampa Bay Fisheries | 2 |
+| Ahold Delhaize | Taylor Farms New England | 2 |
+| Kroger | Butterball | 2 |
+| Whole Foods | WILLOW TREE POULTRY FARM | 2 |
+| Sam's Club | Rich Products | 2 |
+| H-E-B | J Bar B Foods | 2 |
+| Trader Joe's | Mary's Harvest Fresh Foods | 2 |
+| Whole Foods | F&S Fresh Foods | 2 |
 | Kroger | Caito Foods Service | 2 |
 | Trader Joe's | Caito Foods Service | 2 |
 | Aldi | Ready Pac Foods | 2 |
@@ -117,6 +137,95 @@ Unique retailer -> maker edges: 704
 | Giant Eagle | Treehouse Foods | 2 |
 | Walmart | Refresco Beverages US | 2 |
 | Kroger | Admiralty Island Fisheries | 2 |
+| Trader Joe's | Freshrealm, FreshRealm, California Ranch Food | 1 |
+| Walmart | Freshrealm, FreshRealm, California Ranch Food | 1 |
+| Trader Joe's | WCD Kitchen - Minooka | 1 |
+| Ahold Delhaize | Roth Premium Foods | 1 |
+| Kroger | FreshRealm | 1 |
+| Wegmans | Perdue Foods | 1 |
+| Aldi | Bestway Sandwiches | 1 |
+| Walmart | Rajbhog Foods (NJ) | 1 |
+| H-E-B | San Antonio Packing | 1 |
+| Kroger | Taylor Farm - Pacific | 1 |
+| Trader Joe's | CJ Foods Manufacturing Beaumont | 1 |
+| Amazon | SK Food Group | 1 |
+| Trader Joe's | Mama Vicky's | 1 |
+| Whole Foods | Fresh Foods of Washington | 1 |
+| Costco | JBS Prepared Foods | 1 |
+| Costco | Kettle Cuisine Midco | 1 |
+| Wakefern/ShopRite | Kettle Cuisine Midco | 1 |
+| Walmart |  | 1 |
+| Trader Joe's | Taylor Farms Northwest | 1 |
+| Wegmans | CAFE SPICE | 1 |
+| Aldi | Vanguard Culinary Group | 1 |
+| Meijer | Daniele Operating - Stedagio | 1 |
+| H-E-B | Tyson Fresh Meats | 1 |
+| Sam's Club | Smithfield Packaged Meats | 1 |
+| Walmart | JBS Prepared Foods | 1 |
+| Wegmans | A.S.K. Foods | 1 |
+| Trader Joe's | R & G Fine Foods | 1 |
+| Trader Joe's | Fortune Avenue Foods | 1 |
+| Trader Joe's | Innovative Solutions | 1 |
+| 7-Eleven | Evans Food Group | 1 |
+| Dollar General | Crider | 1 |
+| Kroger | Crider | 1 |
+| Associated Wholesale Grocers | National Steak Processors (2024) | 1 |
+| Ahold Delhaize | Plainville Farms | 1 |
+| Whole Foods |  | 1 |
+| Aldi | Ajinomoto Foods North America | 1 |
+| Walmart | Ajinomoto Foods North America | 1 |
+| Walmart | Taylor Farms TX | 1 |
+| H-E-B | Taylor Farms TX | 1 |
+| Walmart | Lakeside Refrigerated Services | 1 |
+| Wegmans | Gold Creek Foods | 1 |
+| Kroger | Foster Farms | 1 |
+| Albertsons | Taylor Farms New Jersey | 1 |
+| Wegmans |  | 1 |
+| H-E-B | Gold Creek Foods | 1 |
+| Trader Joe's | Kayem Foods | 1 |
+| Ahold Delhaize | The Pork Rind Factory | 1 |
+| Aldi | Nestle USA | 1 |
+| Walmart | Branding Iron Holdings | 1 |
+| Trader Joe's | La Montagne Holdings | 1 |
+| Kroger | Hormel Foods | 1 |
+| Ahold Delhaize |  | 1 |
+| Ahold Delhaize | Ajinomoto Windsor | 1 |
+| Trader Joe's | Ajinomoto Windsor | 1 |
+| Trader Joe's | GHSE | 1 |
+| Wegmans | Grossglockner | 1 |
+| H-E-B | Sam Kane Beef Processors | 1 |
+| Whole Foods | Kettle Cuisine Midco | 1 |
+| H-E-B | Taylor Farm - Pacific | 1 |
+| Walmart | Century Packing | 1 |
+| Ahold Delhaize | Wayne Farms | 1 |
+| Walmart | RBR Meat | 1 |
+| Trader Joe's | Flagship Food Group | 1 |
+| Ahold Delhaize | Hometown Food | 1 |
+| UNFI/SuperValu | Hometown Food | 1 |
+| Walmart | The Wornick | 1 |
+| Hy-Vee |  | 1 |
+| Publix |  | 1 |
+| Publix | Sandridge RMH Acquisition | 1 |
+| Giant Eagle |  | 1 |
+| Trader Joe's | Green Cuisine | 1 |
+| Kroger | J Bar B Foods | 1 |
+| Sam's Club | Tony Downs Foods | 1 |
+| Kroger | Swift Beef | 1 |
+| Wakefern/ShopRite | Aunt Kitty's Foods | 1 |
+| Giant Eagle | BEF Foods | 1 |
+| Meijer | BEF Foods | 1 |
+| Whole Foods | F&S Produce West | 1 |
+| Walmart | GHSE | 1 |
+| Trader Joe's | F&S Fresh Foods | 1 |
+| Kroger | Envolve Foods | 1 |
+| Publix | Pilgrim's Pride | 1 |
+| Ahold Delhaize | Butterball | 1 |
+| Meijer | JBS Plainwell | 1 |
+| H-E-B | MIBO Fresh Foods | 1 |
+| Kroger | Caito Foods | 1 |
+| Target | C&S Wholesale Grocers | 1 |
+| H-E-B | Bakkavor US - San Antonio | 1 |
+| Walmart | Gold Creek Foods | 1 |
 | Albertsons | Sunland, Incorporated | 1 |
 | Sprouts | Sunland, Incorporated | 1 |
 | Trader Joe's | Sunland, Incorporated | 1 |
@@ -319,7 +428,6 @@ Unique retailer -> maker edges: 704
 | Albertsons | Index Fresh | 1 |
 | Meijer | Guggisberg Cheese | 1 |
 | Trader Joe's | Pacific Foods of Oregon | 1 |
-| Trader Joe's | Mary's Harvest Fresh Foods | 1 |
 | Whole Foods | Mary's Harvest Fresh Foods | 1 |
 | Target | Minnesota Best Maid Cookie | 1 |
 | Aldi | New England Natural Bakers | 1 |
@@ -487,13 +595,11 @@ Unique retailer -> maker edges: 704
 | Kroger | Saratoga Potato Chips | 1 |
 | Walmart | Texas Star Nut and Food | 1 |
 | Kroger | Ardent Mills | 1 |
-| Ahold Delhaize | Taylor Farms New England | 1 |
 | Kroger | Wawona Packing | 1 |
 | Walmart | Wawona Packing | 1 |
 | Wegmans | Wawona Packing | 1 |
 | Target | Shearer'S Snacks | 1 |
 | Trader Joe's | J .R. Simplot | 1 |
-| Walmart | Garland Ventures | 1 |
 | Aldi | Seneca Foods | 1 |
 | Costco | Bumble Bee Foods | 1 |
 | Ahold Delhaize | R. Walters Limited | 1 |
@@ -594,7 +700,6 @@ Unique retailer -> maker edges: 704
 | Target | Otis McAllister | 1 |
 | Kroger | Townsend Farms | 1 |
 | H-E-B | Give & Go Prepared Foods | 1 |
-| Sam's Club | Rich Products | 1 |
 | Wegmans | Taylor Farms Maryland | 1 |
 | Costco | Berner Foods | 1 |
 | Amazon | GIVE AND GO PREPARED FOODS | 1 |
@@ -639,7 +744,6 @@ Unique retailer -> maker edges: 704
 | Trader Joe's | Barsotti Juice | 1 |
 | Walmart | Taylor Fresh Foods | 1 |
 | Sam's Club | Biery Cheese | 1 |
-| Whole Foods | F&S Fresh Foods | 1 |
 | Walmart | The James Skinner | 1 |
 | Wegmans | Summer Fresh Salads | 1 |
 | Sam's Club | Cedar's Mediterranean Foods | 1 |
@@ -676,7 +780,6 @@ Unique retailer -> maker edges: 704
 | Wegmans | United Natural Trading | 1 |
 | Kroger | Moonlight Packing | 1 |
 | Walmart | Beaver Street Fisheries | 1 |
-| Walmart | FreshRealm | 1 |
 | Wegmans | Pacific Coast Producers | 1 |
 | Publix | The James Skinner | 1 |
 | Publix | VENTURA FOODS | 1 |
@@ -729,31 +832,32 @@ Unique retailer -> maker edges: 704
 
 | Retailer | maker_linked recalls |
 |---|---:|
-| Walmart | 111 |
-| Trader Joe's | 88 |
-| Kroger | 76 |
-| Aldi | 65 |
-| Ahold Delhaize | 51 |
-| Target | 49 |
-| Albertsons | 47 |
-| Wegmans | 47 |
-| Whole Foods | 36 |
-| Meijer | 32 |
-| Publix | 32 |
-| H-E-B | 29 |
-| UNFI/SuperValu | 25 |
+| Walmart | 126 |
+| Trader Joe's | 114 |
+| Kroger | 90 |
+| Aldi | 72 |
+| Ahold Delhaize | 60 |
+| Wegmans | 53 |
+| Albertsons | 50 |
+| Target | 50 |
+| Whole Foods | 45 |
+| H-E-B | 44 |
+| Publix | 37 |
+| Meijer | 35 |
+| UNFI/SuperValu | 26 |
 | Western Family | 24 |
-| Hy-Vee | 18 |
-| Giant Eagle | 17 |
-| Costco | 17 |
+| Giant Eagle | 22 |
+| Costco | 19 |
+| Hy-Vee | 19 |
+| Wakefern/ShopRite | 16 |
+| Sam's Club | 15 |
 | Sprouts | 14 |
-| Wakefern/ShopRite | 14 |
-| Sam's Club | 12 |
 | WinCo | 11 |
-| 7-Eleven | 7 |
-| Dollar General | 6 |
-| Amazon | 5 |
+| 7-Eleven | 8 |
+| Dollar General | 7 |
+| Amazon | 6 |
 | CVS | 4 |
+| Associated Wholesale Grocers | 1 |
 | Weis | 1 |
 
 Counts are unreviewed matches. Fill the `verdict` column in hits.csv, then run `python3 extract.py --score hits.csv` for precision.

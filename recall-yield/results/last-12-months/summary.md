@@ -2,27 +2,30 @@
 
 | Source | Recalls | maker_linked | retailer_self | sold_at_only | none | maker_linked % |
 |---|---:|---:|---:|---:|---:|---:|
-| FSIS | 0 | 0 | 0 | 0 | 0 | 0.0% |
+| FSIS | 13 | 2 | 0 | 0 | 11 | 15.4% |
 | FDA human food | 532 | 37 | 14 | 2 | 479 | 7.0% |
 | FDA pet/animal | 6 | 0 | 0 | 0 | 6 | 0.0% |
-| ALL excl. pet | 532 | 37 | 14 | 2 | 479 | 7.0% |
-| ALL | 538 | 37 | 14 | 2 | 485 | 6.9% |
+| ALL excl. pet | 545 | 39 | 14 | 2 | 490 | 7.2% |
+| ALL | 551 | 39 | 14 | 2 | 496 | 7.1% |
 
-FSIS maker_linked recalls that also carry an EST (plant) number: 0 of 0
+FSIS maker_linked recalls that also carry an EST (plant) number: 2 of 2
 
 ## Pass bars
 
 | Bar | Result | Pass |
 |---|---|---|
-| Unique retailer -> maker edges per year (excl. pet) >= 40 | 48.2 | yes |
-| FSIS maker_linked recalls with a plant (EST) number >= 70% | 0% | no |
+| Unique retailer -> maker edges per year (excl. pet) >= 40 | 51.2 | yes |
+| FSIS maker_linked recalls with a plant (EST) number >= 70% | 100% | yes |
 | Big five retailers with at least one edge (all five) | 5/5 (none missing) | yes |
 
-Unique retailer -> maker edges: 48
+Unique retailer -> maker edges: 51
 
 | Retailer | Maker (recalling firm) | Recalls |
 |---|---|---:|
 | Kroger | Admiralty Island Fisheries | 2 |
+| Trader Joe's | Freshrealm, FreshRealm, California Ranch Food | 1 |
+| Walmart | Freshrealm, FreshRealm, California Ranch Food | 1 |
+| Trader Joe's | WCD Kitchen - Minooka | 1 |
 | Wegmans | Mellace Family Brands California | 1 |
 | Albertsons | Admiralty Island Fisheries | 1 |
 | Publix | Admiralty Island Fisheries | 1 |
@@ -73,16 +76,16 @@ Unique retailer -> maker edges: 48
 
 | Retailer | maker_linked recalls |
 |---|---:|
-| Walmart | 8 |
+| Walmart | 9 |
 | Kroger | 7 |
 | Publix | 6 |
+| Trader Joe's | 4 |
 | Aldi | 4 |
 | H-E-B | 4 |
 | Wegmans | 3 |
 | Target | 3 |
 | Albertsons | 2 |
 | Ahold Delhaize | 2 |
-| Trader Joe's | 2 |
 | Meijer | 2 |
 | WinCo | 1 |
 | Sprouts | 1 |
