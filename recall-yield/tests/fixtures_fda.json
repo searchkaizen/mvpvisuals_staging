@@ -1,0 +1,8 @@
+{"results": [
+ {"event_id": "90001", "recall_number": "F-0001-2026", "report_date": "20251015", "recalling_firm": "TreeHouse Foods, Inc.", "city": "Oak Brook", "state": "IL", "product_description": "Great Value Frozen Waffles, 10 ct, UPC 078742012345", "reason_for_recall": "Listeria", "distribution_pattern": "Nationwide"},
+ {"event_id": "90001", "recall_number": "F-0002-2026", "report_date": "20251015", "recalling_firm": "TreeHouse Foods, Inc.", "city": "Oak Brook", "state": "IL", "product_description": "Kroger Homestyle Waffles 10 ct", "reason_for_recall": "Listeria", "distribution_pattern": "Nationwide"},
+ {"event_id": "90002", "report_date": "20260110", "recalling_firm": "Trader Joe's Company", "city": "Monrovia", "state": "CA", "product_description": "Trader Joe's Cashew Clusters 12 oz", "reason_for_recall": "Foreign material", "distribution_pattern": "Nationwide"},
+ {"event_id": "90003", "report_date": "20260201", "recalling_firm": "Sunshine Mills", "city": "Red Bay", "state": "AL", "product_description": "Premium trail mix 8 oz bags", "reason_for_recall": "Undeclared peanut", "distribution_pattern": "Product was sold at Walmart stores in TX and OK"},
+ {"event_id": "90004", "report_date": "20260301", "recalling_firm": "Acme Produce", "city": "Salinas", "state": "CA", "product_description": "Giant romaine hearts, 3 pk", "reason_for_recall": "E. coli", "distribution_pattern": "CA"},
+ {"event_id": "90005", "report_date": "20240301", "recalling_firm": "Old Co", "product_description": "Great Value corn", "reason_for_recall": "x", "distribution_pattern": "x"}
+]}
