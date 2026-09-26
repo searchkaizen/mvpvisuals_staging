@@ -34,7 +34,10 @@ class ExtractTests(unittest.TestCase):
 
     def test_fsis_est_and_language(self):
         r = run("fsis", "fixtures_fsis.json")
-        self.assertEqual(len(r), 2)
+        self.assertEqual(len(r), 3)
+        self.assertEqual(r["050-2025"]["firm"], "Ghiringhelli Brothers")
+        self.assertEqual(r["050-2025"]["est"], ["P-17156"])
+        self.assertEqual(r["050-2025"]["tier"], "maker_linked")
         self.assertEqual(r["031-2025"]["tier"], "maker_linked")
         self.assertEqual(r["031-2025"]["est"], ["12345"])
         self.assertEqual(r["009-2026"]["est"], ["P-45678"])
@@ -48,7 +51,7 @@ class ExtractTests(unittest.TestCase):
                         "--out", tmp], check=True, capture_output=True)
         with open(f"{tmp}/summary.md") as f:
             summary = f.read()
-        self.assertIn("| ALL | 6 | 3 | 1 | 1 | 1 | 50.0% |", summary)
+        self.assertIn("| ALL | 7 | 4 | 1 | 1 | 1 | 57.1% |", summary)
 
 
 if __name__ == "__main__":

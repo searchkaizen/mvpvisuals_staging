@@ -44,7 +44,14 @@ HEADERS = {
 }
 
 EST_RE = re.compile(
-    r"\bEST\.?\s*(?:No\.?\s*)?((?:[MPV][\s-]?)?\d{1,6}[A-Z]?)\b", re.I)
+    r"(?:\bEST\.?\s*(?:No\.?\s*)?|establishment\s+numbers?\s*[\"“]?\s*(?:EST\.?\s*)?)"
+    r"((?:[MPVG][\s-]?)?\d{1,6}[A-Z]?)\b", re.I)
+# Older FSIS records leave field_establishment blank; the summary opens with
+# "WASHINGTON, Oct. 5, 2017 <Firm>, a <City, State> establishment, is recalling"
+FSIS_FIRM_RE = re.compile(
+    r"(?:WASHINGTON,?\s+[A-Z][a-z]+\.?\s+\d{1,2},\s+\d{4},?\s*[–-]?\s*|^\s*)"
+    r"(?:An?\s+)?([A-Z0-9][^.]{1,100}?)"
+    r"(?:,\s+(?:an?|located)\s|\s+establishment\b|\s+locations?\b|\s+(?:is|are)\s+recalling)")
 TAG_RE = re.compile(r"<[^>]+>")
 
 
@@ -122,6 +129,12 @@ def fda_records(raw, start, end):
         }
 
 
+def fsis_firm(r):
+    m = FSIS_FIRM_RE.search(clean(r.get("field_summary")))
+    firm = m.group(1).strip() if m else ""
+    return "" if firm.startswith(("The U.S.", "FSIS")) else firm
+
+
 def fsis_records(raw, start, end):
     for r in raw:
         if r.get("langcode", "English") != "English":
@@ -135,7 +148,7 @@ def fsis_records(raw, start, end):
             "source": "FSIS",
             "id": r.get("field_recall_number") or r.get("field_title"),
             "date": str(d),
-            "firm": clean(r.get("field_establishment")),
+            "firm": clean(r.get("field_establishment")) or fsis_firm(r),
             "firm_location": "",
             "text": body,
             "context": "",
@@ -183,13 +196,13 @@ def firm_is_retailer(firm, retailer):
     return any(p.search(firm or "") for p in FIRM_PATTERNS[retailer])
 
 
-PET_RE = re.compile(r"\b(dog|cat|pet|puppy|kitten|canine|feline|bird ?seed|"
+PET_RE = re.compile(r"(?<!hot )(?<!corn )\b(dog|cat|pet|puppy|kitten|canine|feline|bird ?seed|"
                     r"animal feed|chews?|kibble)s?\b", re.I)
 
 
 def classify(rec):
     brands = find_brands(rec["text"])
-    out = dict(rec, retailers=sorted(brands), pet=bool(PET_RE.search(rec["text"])),
+    out = dict(rec, retailers=sorted(brands), pet=rec["source"] == "FDA" and bool(PET_RE.search(rec["text"])),
                brands=sorted(
         b for bs in brands.values() for b in bs))
     if brands:

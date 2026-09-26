@@ -37,7 +37,7 @@ RETAILERS = {
         "brands": ["Kroger", "Simple Truth", "Private Selection",
                    "Home Chef", "Heritage Farm", "Smart Way"],
         "firm": [r"\bkroger\b", r"fred meyer", r"ralphs", r"king soopers",
-                 r"harris teeter", r"smith'?s food"],
+                 r"harris teeter", r"smith'?s food", r"roundy'?s"],
         "sold_at": r"kroger|fred meyer|ralphs|king soopers|harris teeter",
     },
     "Albertsons": {

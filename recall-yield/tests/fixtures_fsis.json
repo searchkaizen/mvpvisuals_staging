@@ -1,5 +1,37 @@
 [
- {"langcode": "English", "field_recall_date": "2025-11-20", "field_recall_number": "031-2025", "field_recall_type": "Active Recall", "field_title": "Ground Beef Products Recalled", "field_establishment": "Lakeside Packers LLC", "field_summary": "<p>The products subject to recall bear establishment number &ldquo;EST. 12345&rdquo; inside the USDA mark of inspection. Products were labeled as <strong>Kirkland Signature</strong> Ground Beef.</p>", "field_product_items": "3-lb. packages"},
- {"langcode": "Spanish", "field_recall_date": "2025-11-20", "field_title": "Retiro", "field_establishment": "Lakeside Packers LLC", "field_summary": "Kirkland Signature"},
- {"langcode": "English", "field_recall_date": "2026-04-02", "field_recall_number": "009-2026", "field_title": "Chicken Salad Recalled", "field_establishment": "Fresh Kitchen Co.", "field_summary": "The products bear EST. P-45678. Items were sold under the Happy Belly and Signature Cafe labels.", "field_product_items": ""}
+ {
+  "langcode": "English",
+  "field_recall_date": "2025-11-20",
+  "field_recall_number": "031-2025",
+  "field_recall_type": "Active Recall",
+  "field_title": "Ground Beef Products Recalled",
+  "field_establishment": "Lakeside Packers LLC",
+  "field_summary": "<p>The products subject to recall bear establishment number &ldquo;EST. 12345&rdquo; inside the USDA mark of inspection. Products were labeled as <strong>Kirkland Signature</strong> Ground Beef.</p>",
+  "field_product_items": "3-lb. packages"
+ },
+ {
+  "langcode": "Spanish",
+  "field_recall_date": "2025-11-20",
+  "field_title": "Retiro",
+  "field_establishment": "Lakeside Packers LLC",
+  "field_summary": "Kirkland Signature"
+ },
+ {
+  "langcode": "English",
+  "field_recall_date": "2026-04-02",
+  "field_recall_number": "009-2026",
+  "field_title": "Chicken Salad Recalled",
+  "field_establishment": "Fresh Kitchen Co.",
+  "field_summary": "The products bear EST. P-45678. Items were sold under the Happy Belly and Signature Cafe labels.",
+  "field_product_items": ""
+ },
+ {
+  "langcode": "English",
+  "field_recall_date": "2025-10-01",
+  "field_recall_number": "050-2025",
+  "field_title": "Turkey Recalled",
+  "field_establishment": "",
+  "field_summary": "WASHINGTON, Oct. 1, 2025 Ghiringhelli Brothers, a Vallejo, Calif. establishment, is recalling salads sold as Trader Joe's brand. The products bear establishment number \"P-17156\" inside the USDA mark of inspection.",
+  "field_product_items": ""
+ }
 ]

@@ -23,14 +23,13 @@ jobs:
           python-version: "3.11"
       - name: Unit tests
         run: python -m unittest discover -s tests -v
-      - name: Fetch FSIS through a headless browser
-        id: fsis
-        continue-on-error: true
+      # FSIS's CDN blocks datacenter IPs (403 even for a real browser), so use a
+      # public snapshot of the same API: 2014-01 to 2025-11, 1,982 records.
+      - name: Fetch FSIS snapshot
         run: |
-          pip install -q playwright
-          python -m playwright install --with-deps chromium > /dev/null
           mkdir -p raw
-          python fetch_fsis_browser.py raw/fsis.json
+          curl -sSfL -o raw/fsis.json \
+            https://raw.githubusercontent.com/deeptijaswal11/Food-Safety-Recall-Analysis/main/usda_food_safety_recalls.json
       - name: Fetch FDA and score full history (2012 on)
         run: |
           FSIS_ARG=""
