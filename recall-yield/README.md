@@ -9,6 +9,17 @@ recalls, how often does a recall name a store brand **and** a maker that isn't
 the retailer? That pairing is a brand → maker edge. For FSIS recalls, the EST
 number adds the plant.
 
+## Prototype: "Who made this?"
+
+`pantry/index.html` looks up a USDA plant number (from the round inspection
+mark on meat, poultry and egg packages), a store brand, a retailer or a
+company. It shows the plant, the company, the store brands recalls have tied
+it to, and its recall history. `pantry/build_db.py` builds `pantry/db.json`
+from the FSIS plant directory (`data/mpi_directory_2021.csv`, a 2021 copy,
+because fsis.usda.gov blocks datacenter IPs), the FSIS recall snapshot and
+`results/all-history/hits.csv`. To view it locally, run
+`python3 -m http.server` in `pantry/` and open `localhost:8000`.
+
 ## Run
 
 ```sh

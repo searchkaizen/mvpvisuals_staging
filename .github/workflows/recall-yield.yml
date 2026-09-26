@@ -37,6 +37,8 @@ jobs:
           python extract.py --start 2012-01-01 --end 2026-08-31 --save-raw raw $FSIS_ARG --out results/all-history
       - name: Last 12 months
         run: python extract.py --start 2025-09-01 --end 2026-08-31 --fda raw/fda.json --fsis raw/fsis.json --out results/last-12-months
+      - name: Build pantry lookup database
+        run: python pantry/build_db.py --directory data/mpi_directory_2021.csv --fsis raw/fsis.json --fda-hits results/all-history/hits.csv --out pantry/db.json
       - uses: actions/upload-artifact@v4
         with:
           name: raw-recalls
@@ -45,6 +47,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add results
+          git add results pantry/db.json
           git diff --cached --quiet || git commit -m "Update recall-yield results"
           git push

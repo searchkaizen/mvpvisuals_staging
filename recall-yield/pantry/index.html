@@ -1,0 +1,286 @@
+<title>Who Made This?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+  :root {
+    --paper: #f3f4f1;
+    --card: #ffffff;
+    --ink: #1c2430;
+    --muted: #5d6572;
+    --line: #dcdfe0;
+    --violet: #5a3e8e;
+    --violet-soft: #ece6f6;
+    --recall: #a3261e;
+    --recall-soft: #f8e7e5;
+    --ok: #2f6b45;
+    --ok-soft: #e3f1e7;
+    --display: "Barlow Condensed", "Arial Narrow", Arial, sans-serif;
+    --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --paper: #14171c; --card: #1d2128; --ink: #e7e9ec; --muted: #9aa2ad; --line: #2e333b;
+      --violet: #b69ae6; --violet-soft: #2b2340; --recall: #ef8a80; --recall-soft: #3a1f1d;
+      --ok: #7fc59a; --ok-soft: #1d3326;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --paper: #14171c; --card: #1d2128; --ink: #e7e9ec; --muted: #9aa2ad; --line: #2e333b;
+    --violet: #b69ae6; --violet-soft: #2b2340; --recall: #ef8a80; --recall-soft: #3a1f1d;
+    --ok: #7fc59a; --ok-soft: #1d3326;
+  }
+  * { box-sizing: border-box; }
+  body { background: var(--paper); color: var(--ink); font: 15px/1.55 var(--body); padding-inline: 16px; padding-block: 28px 56px; }
+  .wrap { max-width: 760px; margin: 0 auto; display: grid; gap: 22px; }
+  header { display: grid; gap: 6px; }
+  h1 { font: 700 44px/1 var(--display); letter-spacing: .01em; margin: 0; text-wrap: balance; }
+  .lede { margin: 0; color: var(--muted); max-width: 62ch; }
+  form { display: flex; gap: 8px; flex-wrap: wrap; }
+  input[type=search] { flex: 1 1 260px; font: 500 17px var(--body); padding: 12px 14px; border: 1.5px solid var(--line); border-radius: 6px; background: var(--card); color: var(--ink); }
+  input[type=search]:focus-visible, button:focus-visible, .chip:focus-visible { outline: 2px solid var(--violet); outline-offset: 2px; }
+  button.go { font: 700 17px var(--display); letter-spacing: .06em; text-transform: uppercase; padding: 0 20px; border: 0; border-radius: 6px; background: var(--violet); color: var(--paper); cursor: pointer; min-height: 48px; }
+  .examples { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; color: var(--muted); font-size: 13px; }
+  .chip { font: 500 13px var(--body); border: 1px solid var(--line); background: var(--card); color: var(--ink); padding: 4px 10px; border-radius: 999px; cursor: pointer; }
+  .chip.code { font-family: var(--mono); }
+  #status { color: var(--muted); font-size: 14px; margin: 0; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 20px; display: grid; gap: 16px; }
+  .plant-head { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; }
+  .stamp { flex: 0 0 auto; width: 112px; height: 112px; border: 3px solid var(--violet); border-radius: 50%; display: grid; place-items: center; text-align: center; color: var(--violet); position: relative; }
+  .stamp::before { content: ""; position: absolute; inset: 5px; border: 1px solid var(--violet); border-radius: 50%; opacity: .55; }
+  .stamp small { display: block; font: 600 9px/1.2 var(--display); letter-spacing: .12em; text-transform: uppercase; }
+  .stamp b { display: block; font: 700 21px/1.1 var(--display); letter-spacing: .02em; }
+  h2 { font: 700 28px/1.1 var(--display); margin: 0; text-wrap: balance; }
+  h3 { font: 700 14px var(--display); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin: 0; }
+  .meta { color: var(--muted); font-size: 14px; margin: 2px 0 0; }
+  .keys { font-family: var(--mono); font-size: 13px; }
+  dl.facts { display: grid; grid-template-columns: max-content 1fr; gap: 4px 14px; margin: 0; font-size: 14px; }
+  dl.facts dt { color: var(--muted); }
+  dl.facts dd { margin: 0; }
+  .section { display: grid; gap: 10px; }
+  .brands { display: grid; gap: 8px; }
+  .brand-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: baseline; }
+  .ret { font-weight: 600; }
+  .pill { font-size: 12.5px; padding: 2px 9px; border-radius: 999px; background: var(--violet-soft); color: var(--violet); font-weight: 500; }
+  .pill.recall { background: var(--recall-soft); color: var(--recall); }
+  .pill.ok { background: var(--ok-soft); color: var(--ok); }
+  .recalls { display: grid; gap: 0; border-top: 1px solid var(--line); }
+  .rc { display: grid; grid-template-columns: 92px 1fr; gap: 4px 12px; padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
+  .rc time { font-variant-numeric: tabular-nums; color: var(--muted); font-family: var(--mono); font-size: 12.5px; padding-top: 2px; }
+  .rc p { margin: 0; overflow-wrap: anywhere; }
+  .rc .tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px; }
+  .empty { color: var(--muted); font-size: 14px; margin: 0; }
+  .list { display: grid; gap: 0; border-top: 1px solid var(--line); }
+  .row { display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .row button.link { background: none; border: 0; padding: 0; font: 600 15px var(--body); color: var(--violet); cursor: pointer; text-align: left; }
+  .row .sub { color: var(--muted); font-size: 13.5px; }
+  .more { justify-self: start; }
+  footer { color: var(--muted); font-size: 13px; display: grid; gap: 6px; border-top: 1px solid var(--line); padding-top: 16px; }
+  footer p { margin: 0; max-width: 70ch; }
+  @media (max-width: 480px) {
+    h1 { font-size: 36px; }
+    .rc { grid-template-columns: 1fr; }
+    .stamp { width: 96px; height: 96px; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .card { animation: in .18s ease-out; }
+    @keyframes in { from { transform: translateY(4px); opacity: .6; } to { transform: none; opacity: 1; } }
+  }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>Who made this?</h1>
+    <p class="lede">Type the plant number from the USDA inspection mark on a meat, poultry or egg package, or search a store brand, retailer or company. Maker links come from federal recall notices.</p>
+  </header>
+
+  <form id="f" role="search">
+    <input id="q" type="search" autocomplete="off" placeholder="EST. 17156, P-7345, Great Value, Trader Joe's…" aria-label="Plant number, brand, retailer or company">
+    <button class="go" type="submit">Look up</button>
+  </form>
+  <div class="examples" id="examples">Try:</div>
+
+  <p id="status" role="status">Loading 11,400 plants and 2,000 recalls…</p>
+  <div id="out" class="wrap" style="gap:16px"></div>
+
+  <footer>
+    <p><b>What a link means.</b> A federal recall notice named this company alongside that store brand at least once. It does not mean the company makes every product sold under the brand.</p>
+    <p id="sources">Sources: FSIS plant directory (2021 copy), FSIS recall notices (2014 to Nov 2025), openFDA food enforcement reports (2012 to Aug 2026).</p>
+  </footer>
+</div>
+
+<script>
+const EXAMPLES = [["P-17156", true], ["7345", true], ["Trader Joe's", false], ["Kirkland Signature", false], ["Butterball", false]];
+const $ = s => document.querySelector(s);
+const out = $("#out"), status = $("#status"), q = $("#q");
+let DB, bareIdx = {}, plantRecalls = {}, brandIdx = {};
+
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const norm = s => String(s).toLowerCase().replace(/[’']/g, "'").replace(/\s+/g, " ").trim();
+
+function indexDb() {
+  for (const k of Object.keys(DB.plants)) (bareIdx[k.replace(/^[MPVIG]/, "")] ||= []).push(k);
+  for (const [id, r] of Object.entries(DB.recalls)) {
+    for (const p of r.plants) (plantRecalls[p] ||= []).push(id);
+    if (r.tier !== "maker_linked" || !r.maker) continue;
+    for (const b of r.brands) {
+      const e = (brandIdx[norm(b)] ||= { name: b, makers: {} });
+      (e.makers[r.maker] ||= []).push(id);
+    }
+  }
+}
+
+const PLANT_RE = /^(?:est\.?\s*(?:no\.?)?\s*)?([mpvig])?\s*-?\s*(\d{1,6})\s*([a-z])?$/i;
+
+function search(raw) {
+  const text = raw.trim();
+  if (!text) return;
+  const m = text.match(PLANT_RE);
+  if (m) return showPlant(m);
+  showText(text);
+}
+
+function siteKeys(idx) {
+  return Object.keys(DB.plants).filter(k => DB.plants[k] === idx);
+}
+
+function showPlant(m) {
+  const num = m[2].replace(/^0+/, "") + (m[3] || "").toUpperCase();
+  const pref = (m[1] || "").toUpperCase();
+  let keys = pref ? [pref + num] : (bareIdx[num] || []);
+  keys = keys.filter(k => k in DB.plants);
+  if (!keys.length) {
+    status.textContent = `No plant with number ${pref}${num} in the directory or in recall notices. The 2021 directory copy may predate it.`;
+    out.innerHTML = "";
+    return;
+  }
+  const sites = [...new Set(keys.map(k => DB.plants[k]))];
+  status.textContent = sites.length > 1 ? `${sites.length} plants share the number ${num}. Showing all of them.` : "";
+  out.innerHTML = sites.map(i => plantCard(i)).join("");
+}
+
+function plantCard(i) {
+  const s = DB.sites[i], keys = siteKeys(i);
+  const recallIds = [...new Set(keys.flatMap(k => plantRecalls[k] || []))];
+  const makerKeys = s.makers || [];
+  const brandBlock = makerKeys.map(mk => brandRows(mk)).join("");
+  const facts = [
+    s.address && ["Address", esc(s.address)],
+    s.activities && ["Inspected for", esc(s.activities)],
+    s.dba && ["Also trades as", esc(s.dba)],
+    ["Source", esc(s.source)],
+  ].filter(Boolean).map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join("");
+  return `<article class="card">
+    <div class="plant-head">
+      <div class="stamp" aria-hidden="true"><div><small>U.S. Inspected</small><b>EST. ${esc(keys[0].replace(/^[MPVIG]/, ""))}</b><small>and passed</small></div></div>
+      <div>
+        <h2>${esc(s.company || "Unknown company")}</h2>
+        <p class="meta keys">${keys.map(esc).join(" &middot; ")}</p>
+      </div>
+    </div>
+    <dl class="facts">${facts}</dl>
+    <div class="section"><h3>Store brands linked by recalls</h3>
+      ${brandBlock || `<p class="empty">No recall has tied this plant's company to a store brand yet.</p>`}
+    </div>
+    <div class="section"><h3>Recalls naming this plant (${recallIds.length})</h3>${recallList(recallIds)}</div>
+  </article>`;
+}
+
+const brandKey = b => norm(b).replace(/[^a-z0-9&]/g, "");
+const dedupe = bs => [...new Map(bs.map(b => [brandKey(b), b])).values()];
+
+function brandRows(mk) {
+  const m = DB.makers[mk];
+  if (!m || !Object.keys(m.brands).length) return "";
+  return `<div class="brands">${Object.entries(m.brands).map(([ret, bs]) =>
+    `<div class="brand-row"><span class="ret">${esc(ret)}</span>${dedupe(bs).map(b => `<span class="pill">${esc(b)}</span>`).join("")}</div>`).join("")}</div>`;
+}
+
+function recallList(ids, limit = 6) {
+  if (!ids.length) return `<p class="empty">None on record.</p>`;
+  const sorted = ids.map(id => [id, DB.recalls[id]]).sort((a, b) => b[1].date.localeCompare(a[1].date));
+  const row = ([id, r]) => {
+    const tier = r.tier === "maker_linked" ? `<span class="pill ok">maker named</span>`
+      : r.tier === "retailer_self" ? `<span class="pill">retailer recalled it</span>` : "";
+    const rets = r.retailers.map(x => `<span class="pill">${esc(x)}</span>`).join("");
+    return `<div class="rc"><time>${esc(r.date)}</time><div><p><b>${esc(r.firm || "Unnamed firm")}</b> &middot; ${esc(id)}</p>
+      <p>${esc(r.text.slice(0, 220))}${r.text.length > 220 ? "&hellip;" : ""}</p><div class="tags"><span class="pill recall">${esc(r.source)} recall</span>${tier}${rets}</div></div></div>`;
+  };
+  const first = sorted.slice(0, limit).map(row).join("");
+  const rest = sorted.length > limit ? `<details><summary class="chip more">Show ${sorted.length - limit} more</summary>${sorted.slice(limit).map(row).join("")}</details>` : "";
+  return `<div class="recalls">${first}${rest}</div>`;
+}
+
+function makerCard(mk) {
+  const m = DB.makers[mk];
+  const plants = m.plants.filter(p => p in DB.plants);
+  const plantChips = plants.map(p => `<button class="chip code" type="button" data-q="${esc(p)}">${esc(p)}</button>`).join(" ");
+  return `<article class="card">
+    <div><h2>${esc(m.name)}</h2>${plants.length ? `<p class="meta">Plants: ${plantChips}</p>` : `<p class="meta">No plant number on record (FDA-regulated products don't print one).</p>`}</div>
+    <div class="section"><h3>Store brands linked by recalls</h3>${brandRows(mk) || `<p class="empty">None yet.</p>`}</div>
+    <div class="section"><h3>Recall history (${m.recalls.length})</h3>${recallList(m.recalls)}</div>
+  </article>`;
+}
+
+function retailerCard(ret) {
+  const makers = DB.retailers[ret].map(k => [k, DB.makers[k]])
+    .map(([k, m]) => [k, m, m.recalls.filter(id => DB.recalls[id].retailers.includes(ret))])
+    .sort((a, b) => (b[2][0] ? DB.recalls[b[2][0]].date : "").localeCompare(a[2][0] ? DB.recalls[a[2][0]].date : ""));
+  const rows = makers.map(([k, m, ids]) => `<div class="row"><div><button class="link" type="button" data-maker="${esc(k)}">${esc(m.name)}</button>
+      <div class="sub">${dedupe(m.brands[ret] || []).map(esc).join(", ")}</div></div>
+      <div class="sub">${ids.length} recall${ids.length === 1 ? "" : "s"}${ids[0] ? ", latest " + esc(DB.recalls[ids[0]].date) : ""}</div></div>`).join("");
+  return `<article class="card"><div><h2>${esc(ret)}</h2><p class="meta">${makers.length} companies named in recalls of ${esc(ret)} store brands.</p></div>
+    <div class="list">${rows}</div></article>`;
+}
+
+function brandCard(e) {
+  const rows = Object.entries(e.makers).sort((a, b) => b[1].length - a[1].length).map(([k, ids]) => {
+    const latest = ids.map(id => DB.recalls[id].date).sort().pop();
+    return `<div class="row"><button class="link" type="button" data-maker="${esc(k)}">${esc(DB.makers[k].name)}</button>
+      <span class="sub">${ids.length} recall${ids.length === 1 ? "" : "s"}, latest ${esc(latest)}</span></div>`;
+  }).join("");
+  return `<article class="card"><div><h2>${esc(e.name)}</h2><p class="meta">Companies named in recalls of ${esc(e.name)} products.</p></div><div class="list">${rows}</div></article>`;
+}
+
+function showText(text) {
+  const t = norm(text);
+  const cards = [];
+  const rets = Object.keys(DB.retailers).filter(r => norm(r).includes(t));
+  const brands = Object.values(brandIdx).filter(e => norm(e.name).includes(t));
+  const makers = Object.keys(DB.makers).filter(k => norm(DB.makers[k].name).includes(t) || k.includes(t))
+    .sort((a, b) => DB.makers[b].recalls.length - DB.makers[a].recalls.length);
+  const plantCos = DB.sites.map((s, i) => [s, i]).filter(([s]) => norm(s.company).includes(t) || norm(s.dba).includes(t));
+  brands.slice(0, 3).forEach(e => cards.push(brandCard(e)));
+  rets.slice(0, 2).forEach(r => cards.push(retailerCard(r)));
+  if (makers.length === 1 && !brands.length && !rets.length) cards.push(makerCard(makers[0]));
+  else if (makers.length) cards.push(`<article class="card"><h3>Companies with recalls (${makers.length})</h3><div class="list">${makers.slice(0, 15).map(k =>
+      `<div class="row"><button class="link" type="button" data-maker="${esc(k)}">${esc(DB.makers[k].name)}</button><span class="sub">${DB.makers[k].recalls.length} recalls${Object.keys(DB.makers[k].brands).length ? ", store-brand links" : ""}</span></div>`).join("")}</div></article>`);
+  if (plantCos.length && !makers.length) cards.push(`<article class="card"><h3>Plants (${plantCos.length})</h3><div class="list">${plantCos.slice(0, 15).map(([s, i]) => {
+      const k = siteKeys(i)[0];
+      return `<div class="row"><button class="link" type="button" data-q="${esc(k)}">${esc(s.company)}</button><span class="sub">${esc(k)} &middot; ${esc(s.address.split(", ").slice(-2).join(", "))}</span></div>`;
+    }).join("")}</div></article>`);
+  status.textContent = cards.length ? "" : `Nothing matches “${text}”. No recall has named a maker for it yet, or the name is spelled differently.`;
+  out.innerHTML = cards.join("");
+}
+
+document.addEventListener("click", e => {
+  const b = e.target.closest("[data-q],[data-maker]");
+  if (!b) return;
+  if (b.dataset.maker) { status.textContent = ""; out.innerHTML = makerCard(b.dataset.maker); q.value = DB.makers[b.dataset.maker].name; }
+  else { q.value = b.dataset.q; search(b.dataset.q); }
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+$("#f").addEventListener("submit", e => { e.preventDefault(); search(q.value); });
+
+$("#examples").insertAdjacentHTML("beforeend", EXAMPLES.map(([x, code]) =>
+  `<button class="chip${code ? " code" : ""}" type="button" data-q="${esc(x)}">${esc(x)}</button>`).join(""));
+
+fetch("db.json").then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(db => {
+  DB = db; indexDb();
+  status.textContent = "";
+  q.value = "P-17156"; search("P-17156");
+}).catch(err => { status.textContent = `The lookup data didn't load (${err.message}). Reload the page to try again.`; });
+</script>
