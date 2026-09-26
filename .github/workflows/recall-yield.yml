@@ -1,0 +1,40 @@
+name: recall-yield
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [claude/store-brand-recall-traceability-7mg7iu]
+    paths: ["recall-yield/**", ".github/workflows/recall-yield.yml"]
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: recall-yield
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Unit tests
+        run: python -m unittest discover -s tests -v
+      - name: Fetch and score full history (2012 on)
+        run: python extract.py --start 2012-01-01 --end 2026-08-31 --save-raw raw --out results/all-history
+      - name: Last 12 months
+        run: python extract.py --start 2025-09-01 --end 2026-08-31 --fda raw/fda.json --fsis raw/fsis.json --out results/last-12-months
+      - uses: actions/upload-artifact@v4
+        with:
+          name: raw-recalls
+          path: recall-yield/raw
+      - name: Commit results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results
+          git diff --cached --quiet || git commit -m "Update recall-yield results"
+          git push

@@ -25,6 +25,7 @@ import os
 import json
 import re
 import sys
+import urllib.error
 import urllib.request
 from collections import Counter, defaultdict
 from datetime import date, datetime
@@ -49,16 +50,25 @@ def http_json(url):
 
 
 def fetch_fda(start, end):
-    rows, skip = [], 0
-    rng = f"report_date:[{start:%Y%m%d}+TO+{end:%Y%m%d}]"
-    while True:
-        data = http_json(f"{FDA_URL}?search={rng}&limit=1000&skip={skip}")
-        batch = data.get("results", [])
-        rows += batch
-        total = data["meta"]["results"]["total"]
-        skip += len(batch)
-        if not batch or skip >= total:
-            return rows
+    """Page through openFDA one year at a time (its skip cap is 25,000)."""
+    rows = []
+    for y in range(start.year, end.year + 1):
+        lo, hi = max(start, date(y, 1, 1)), min(end, date(y, 12, 31))
+        rng = f"report_date:[{lo:%Y%m%d}+TO+{hi:%Y%m%d}]"
+        skip = 0
+        while True:
+            try:
+                data = http_json(f"{FDA_URL}?search={rng}&limit=1000&skip={skip}")
+            except urllib.error.HTTPError as e:
+                if e.code == 404:  # openFDA's "no matches"
+                    break
+                raise
+            batch = data.get("results", [])
+            rows += batch
+            skip += len(batch)
+            if not batch or skip >= data["meta"]["results"]["total"]:
+                break
+    return rows
 
 
 def fetch_fsis():
@@ -166,9 +176,14 @@ def firm_is_retailer(firm, retailer):
     return any(p.search(firm or "") for p in FIRM_PATTERNS[retailer])
 
 
+PET_RE = re.compile(r"\b(dog|cat|pet|puppy|kitten|canine|feline|bird ?seed|"
+                    r"animal feed|chews?|kibble)s?\b", re.I)
+
+
 def classify(rec):
     brands = find_brands(rec["text"])
-    out = dict(rec, retailers=sorted(brands), brands=sorted(
+    out = dict(rec, retailers=sorted(brands), pet=bool(PET_RE.search(rec["text"])),
+               brands=sorted(
         b for bs in brands.values() for b in bs))
     if brands:
         makers = [r for r in brands if not firm_is_retailer(rec["firm"], r)]
@@ -185,6 +200,14 @@ def classify(rec):
 # ---------- reporting ----------
 
 TIERS = ["maker_linked", "retailer_self", "sold_at_only", "none"]
+BIG5 = {"Costco", "Walmart", "Kroger", "Aldi", "Trader Joe's"}
+EDGE_BAR, EST_BAR = 40, 70
+SUFFIX_RE = re.compile(r"[,.]?\s*\b(inc|llc|l\.l\.c|corp|corporation|co|company|"
+                       r"ltd|lp|dba .*)\b\.?", re.I)
+
+
+def norm_firm(firm):
+    return re.sub(r"\s+", " ", SUFFIX_RE.sub("", firm or "")).strip(" ,.")
 
 
 def report(results, start, end, outdir):
@@ -195,8 +218,14 @@ def report(results, start, end, outdir):
     lines = [f"# Store-brand extraction yield, {start} to {end}", ""]
     lines += ["| Source | Recalls | " + " | ".join(TIERS) + " | maker_linked % |",
               "|---|---:|" + "---:|" * len(TIERS) + "---:|"]
-    for src in ("FSIS", "FDA", "ALL"):
-        rows = results if src == "ALL" else by_src[src]
+    groups = {
+        "FSIS": by_src["FSIS"],
+        "FDA human food": [r for r in by_src["FDA"] if not r["pet"]],
+        "FDA pet/animal": [r for r in by_src["FDA"] if r["pet"]],
+        "ALL excl. pet": [r for r in results if not r["pet"]],
+        "ALL": results,
+    }
+    for src, rows in groups.items():
         c = Counter(r["tier"] for r in rows)
         pct = 100 * c["maker_linked"] / len(rows) if rows else 0
         lines.append(f"| {src} | {len(rows)} | "
@@ -212,7 +241,27 @@ def report(results, start, end, outdir):
         if r["tier"] != "maker_linked":
             continue
         for ret in r["linked_retailers"]:
-            edges[(ret, r["firm"])] += 1
+            edges[(ret, norm_firm(r["firm"]))] += 1
+
+    # Pass bars, fixed before looking at the data.
+    years = max((end - start).days / 365.25, 1e-9)
+    human_edges = {(ret, norm_firm(r["firm"])) for r in results
+                   if r["tier"] == "maker_linked" and not r["pet"]
+                   for ret in r["linked_retailers"]}
+    est_pct = 100 * with_est / len(fsis_linked) if fsis_linked else 0
+    big5 = {ret for ret, _ in human_edges} & BIG5
+    bars = [
+        (f"Unique retailer -> maker edges per year (excl. pet) >= {EDGE_BAR}",
+         f"{len(human_edges) / years:.1f}", len(human_edges) / years >= EDGE_BAR),
+        (f"FSIS maker_linked recalls with a plant (EST) number >= {EST_BAR}%",
+         f"{est_pct:.0f}%", est_pct >= EST_BAR),
+        ("Big five retailers with at least one edge (all five)",
+         f"{len(big5)}/5 ({', '.join(sorted(BIG5 - big5)) or 'none'} missing)",
+         len(big5) == 5),
+    ]
+    lines += ["", "## Pass bars", "", "| Bar | Result | Pass |", "|---|---|---|"]
+    lines += [f"| {b} | {v} | {'yes' if ok else 'no'} |" for b, v, ok in bars]
+
     lines += ["", f"Unique retailer -> maker edges: {len(edges)}", "",
               "| Retailer | Maker (recalling firm) | Recalls |", "|---|---|---:|"]
     lines += [f"| {ret} | {firm} | {n} |"
@@ -229,7 +278,7 @@ def report(results, start, end, outdir):
     with open(f"{outdir}/summary.md", "w") as f:
         f.write("\n".join(lines) + "\n")
 
-    fields = ["verdict", "tier", "source", "id", "date", "firm", "firm_location",
+    fields = ["verdict", "tier", "pet", "source", "id", "date", "firm", "firm_location",
               "retailers", "brands", "est", "text"]
     with open(f"{outdir}/hits.csv", "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=fields, extrasaction="ignore")
@@ -240,7 +289,7 @@ def report(results, start, end, outdir):
             w.writerow(dict(r, verdict="", retailers=";".join(r["retailers"]),
                             brands=";".join(r["brands"]), est=";".join(r["est"]),
                             text=r["text"][:1500]))
-    print("\n".join(lines[:9]))
+    print("\n".join(lines[:20]))
     print(f"\nWrote {outdir}/summary.md and {outdir}/hits.csv")
 
 
@@ -265,6 +314,7 @@ def main():
     ap.add_argument("--fda", help="saved openFDA food enforcement JSON")
     ap.add_argument("--fsis", help="saved FSIS recall API JSON")
     ap.add_argument("--out", default="out")
+    ap.add_argument("--save-raw", help="directory to save fetched JSON into")
     ap.add_argument("--score", help="score a reviewed hits.csv and exit")
     a = ap.parse_args()
     if a.score:
@@ -278,9 +328,19 @@ def main():
         return data.get("results", data) if isinstance(data, dict) else data
 
     fda_raw = load(a.fda) if a.fda else fetch_fda(start, end)
-    fsis_raw = load(a.fsis) if a.fsis else fetch_fsis()
+    try:
+        fsis_raw = load(a.fsis) if a.fsis else fetch_fsis()
+    except OSError as e:  # FSIS sometimes rejects scripted clients
+        print(f"WARNING: FSIS fetch failed ({e}); continuing with FDA only",
+              file=sys.stderr)
+        fsis_raw = []
 
     os.makedirs(a.out, exist_ok=True)
+    if a.save_raw:
+        os.makedirs(a.save_raw, exist_ok=True)
+        for name, data in (("fda.json", fda_raw), ("fsis.json", fsis_raw)):
+            with open(os.path.join(a.save_raw, name), "w") as f:
+                json.dump(data, f)
     results = [classify(r) for r in
                list(fsis_records(fsis_raw, start, end))
                + list(fda_records(fda_raw, start, end))]
