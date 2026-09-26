@@ -34,7 +34,14 @@ from store_brands import AMBIGUOUS, RETAILERS
 
 FDA_URL = "https://api.fda.gov/food/enforcement.json"
 FSIS_URL = "https://www.fsis.usda.gov/fsis/api/recall/v/1"
-UA = "Mozilla/5.0 (recall-yield research script)"
+HEADERS = {
+    # FSIS sits behind a CDN that turns away bare scripted clients.
+    "User-Agent": ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                   "(KHTML, like Gecko) Chrome/128.0 Safari/537.36"),
+    "Accept": "application/json, text/plain, */*",
+    "Accept-Language": "en-US,en;q=0.9",
+    "Referer": "https://www.fsis.usda.gov/recalls",
+}
 
 EST_RE = re.compile(
     r"\bEST\.?\s*(?:No\.?\s*)?((?:[MPV][\s-]?)?\d{1,6}[A-Z]?)\b", re.I)
@@ -44,7 +51,7 @@ TAG_RE = re.compile(r"<[^>]+>")
 # ---------- fetching ----------
 
 def http_json(url):
-    req = urllib.request.Request(url, headers={"User-Agent": UA})
+    req = urllib.request.Request(url, headers=HEADERS)
     with urllib.request.urlopen(req, timeout=60) as r:
         return json.load(r)
 

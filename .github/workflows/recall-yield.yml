@@ -23,6 +23,13 @@ jobs:
           python-version: "3.11"
       - name: Unit tests
         run: python -m unittest discover -s tests -v
+      - name: Probe FSIS API
+        continue-on-error: true
+        run: |
+          curl -sS -o /tmp/fsis.json -w "HTTP %{http_code}, %{size_download} bytes\n" --max-time 120 \
+            -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0 Safari/537.36" \
+            -H "Accept: application/json" https://www.fsis.usda.gov/fsis/api/recall/v/1
+          head -c 400 /tmp/fsis.json; echo
       - name: Fetch and score full history (2012 on)
         run: python extract.py --start 2012-01-01 --end 2026-08-31 --save-raw raw --out results/all-history
       - name: Last 12 months

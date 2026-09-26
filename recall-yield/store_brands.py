@@ -51,7 +51,7 @@ RETAILERS = {
     "Whole Foods": {
         "brands": ["365 by Whole Foods", "365 Everyday Value",
                    "Whole Foods Market"],
-        "firm": [r"whole foods"],
+        "firm": [r"whole foods?\b", r"\bwfm\b"],
         "sold_at": r"whole foods",
     },
     "Amazon": {
@@ -84,11 +84,16 @@ RETAILERS = {
     },
     "Ahold Delhaize": {
         "brands": ["Nature's Promise", "Taste of Inspirations",
-                   "Food Lion", "Hannaford", "Stop & Shop", "Giant Eagle",
+                   "Food Lion", "Hannaford", "Stop & Shop",
                    "Giant", "Martin's"],
         "firm": [r"ahold", r"delhaize", r"food lion", r"hannaford",
                  r"stop & shop", r"giant food", r"\bgiant\b"],
         "sold_at": r"food lion|hannaford|stop & shop|giant food",
+    },
+    "Giant Eagle": {
+        "brands": ["Giant Eagle", "Market District"],
+        "firm": [r"giant eagle"],
+        "sold_at": r"giant eagle",
     },
     "Publix": {
         "brands": ["Publix", "GreenWise"],
