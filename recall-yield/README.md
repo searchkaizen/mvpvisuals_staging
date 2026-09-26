@@ -1,5 +1,9 @@
 # Store-brand recall extraction yield
 
+**Results: see [FINDINGS.md](FINDINGS.md).** The workflow
+`.github/workflows/recall-yield.yml` reruns everything on each push to this
+branch and commits `results/`.
+
 Tests one question before anything gets built: across 12 months of FSIS and FDA
 recalls, how often does a recall name a store brand **and** a maker that isn't
 the retailer? That pairing is a brand → maker edge. For FSIS recalls, the EST
